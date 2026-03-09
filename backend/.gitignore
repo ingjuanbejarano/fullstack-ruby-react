@@ -1,0 +1,43 @@
+# Environments and secrets
+.env
+.env*
+/.env
+/.env.local
+/.env.development.local
+/.env.test.local
+/.env.production.local
+
+# Logs and databases
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
+/storage/*
+!/storage/.keep
+
+# Credentials and keys
+/config/master.key
+/config/credentials/*.key
+
+# Dependencies and caches
+/.bundle
+/vendor/bundle
+/vendor/ruby
+
+# Coverage and specs
+/coverage/
+.rspec_status
+spec/examples.txt
+
+# OS and Editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
