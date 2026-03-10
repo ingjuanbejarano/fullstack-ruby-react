@@ -2,7 +2,12 @@ import React from 'react';
 
 export const ProductSkeleton: React.FC = () => {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 flex flex-col h-full animate-pulse">
+    <div 
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 flex flex-col h-full animate-pulse"
+      role="status"
+      aria-label="Loading product..."
+    >
+      <span className="sr-only">Loading...</span>
       <div className="flex justify-between items-start mb-4">
         <div className="h-5 w-16 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
         <div className="h-3 w-20 bg-gray-100 dark:bg-gray-700 rounded"></div>

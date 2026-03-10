@@ -17,6 +17,7 @@ dist
 dist-ssr
 build
 out
+storybook-static
 
 # Test coverage
 coverage

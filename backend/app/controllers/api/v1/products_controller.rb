@@ -17,25 +17,26 @@ class Api::V1::ProductsController < ApplicationController
     
     paginated_products = products.order(created_at: :desc).page(page).per(per_page)
 
-    render json: {
-      products: paginated_products,
+    options = {
       meta: {
         current_page: paginated_products.current_page,
         total_pages: paginated_products.total_pages,
         total_count: paginated_products.total_count
       }
     }
+
+    render json: ProductSerializer.new(paginated_products, options).serializable_hash
   end
 
   def show
-    render json: @product
+    render json: ProductSerializer.new(@product).serializable_hash
   end
 
   def create
     result = ::Products::CreateService.new(product_params).call
 
     if result[:success]
-      render json: result[:product], status: :created
+      render json: ProductSerializer.new(result[:product]).serializable_hash, status: :created
     else
       render json: { error: 'Validation failed', messages: result[:errors] }, status: :unprocessable_entity
     end
@@ -45,7 +46,7 @@ class Api::V1::ProductsController < ApplicationController
     result = ::Products::UpdateService.new(@product, product_params).call
 
     if result[:success]
-      render json: result[:product]
+      render json: ProductSerializer.new(result[:product]).serializable_hash
     else
       render json: { error: 'Validation failed', messages: result[:errors] }, status: :unprocessable_entity
     end

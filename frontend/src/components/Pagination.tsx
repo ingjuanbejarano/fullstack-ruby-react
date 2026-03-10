@@ -14,8 +14,8 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
   const endItem = Math.min(currentPage * 10, totalCount);
 
   return (
-    <footer className="mt-8 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 sm:px-6 rounded-lg shadow-sm">
-      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+    <footer className="mt-8 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-4 sm:px-6 rounded-lg shadow-sm">
+      <div className="flex flex-col sm:flex-row w-full flex-1 items-center justify-between gap-4 sm:gap-0">
         <div>
           <p className="text-sm text-gray-700 dark:text-gray-300">
             Showing <span className="font-medium">{startItem}</span> to{' '}
@@ -45,6 +45,8 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
                     ? 'z-10 bg-indigo-600 text-white focus-visible:outline-indigo-600' 
                     : 'text-gray-900 dark:text-gray-200 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800'
                 }`}
+                aria-current={currentPage === p ? 'page' : undefined}
+                aria-label={`Page ${p}`}
               >
                 {p}
               </button>

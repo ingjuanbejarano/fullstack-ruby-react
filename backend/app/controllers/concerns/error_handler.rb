@@ -15,7 +15,7 @@ module ErrorHandler
     Rails.logger.error exception.message
     Rails.logger.error exception.backtrace.join("\n")
 
-    render json: { error: 'Internal Server Error', message: exception.message }, status: :internal_server_error
+    render json: { error: 'Server Error', message: exception.message }, status: :unprocessable_entity
   end
 
   def record_not_found(exception)

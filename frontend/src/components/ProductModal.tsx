@@ -78,6 +78,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, pro
       parsedValue = (e.target as HTMLInputElement).checked;
     } else if (type === 'number') {
       parsedValue = value === '' ? '' : Number(value);
+    } else if (name === 'sku') {
+      parsedValue = value.toUpperCase();
     }
 
     setFormData(prev => ({ ...prev, [name]: parsedValue }));

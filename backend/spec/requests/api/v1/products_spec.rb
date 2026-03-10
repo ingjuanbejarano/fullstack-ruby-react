@@ -12,7 +12,7 @@ RSpec.describe "Api::V1::Products", type: :request do
       expect(response).to have_http_status(:success)
       json_response = JSON.parse(response.body)
       
-      expect(json_response['products'].length).to eq(10)
+      expect(json_response['data'].length).to eq(10)
       expect(json_response['meta']['total_count']).to eq(15)
       expect(json_response['meta']['current_page']).to eq(1)
       expect(json_response['meta']['total_pages']).to eq(2)
@@ -23,8 +23,8 @@ RSpec.describe "Api::V1::Products", type: :request do
       get api_v1_products_path, params: { search: "Apple" }
       
       json_response = JSON.parse(response.body)
-      expect(json_response['products'].length).to eq(1)
-      expect(json_response['products'].first['name']).to eq("Special Apple")
+      expect(json_response['data'].length).to eq(1)
+      expect(json_response['data'].first['attributes']['name']).to eq("Special Apple")
     end
 
     it "filters products by active status" do
@@ -32,8 +32,8 @@ RSpec.describe "Api::V1::Products", type: :request do
       get api_v1_products_path, params: { status: false }
       
       json_response = JSON.parse(response.body)
-      expect(json_response['products'].length).to eq(1)
-      expect(json_response['products'].first['name']).to eq("Inactive Item")
+      expect(json_response['data'].length).to eq(1)
+      expect(json_response['data'].first['attributes']['name']).to eq("Inactive Item")
     end
   end
 
@@ -45,7 +45,7 @@ RSpec.describe "Api::V1::Products", type: :request do
       
       expect(response).to have_http_status(:success)
       json_response = JSON.parse(response.body)
-      expect(json_response['id']).to eq(product.id)
+      expect(json_response['data']['id']).to eq(product.id.to_s)
     end
 
     it "returns 404 when product is not found" do
@@ -73,7 +73,7 @@ RSpec.describe "Api::V1::Products", type: :request do
 
       expect(response).to have_http_status(:created)
       json_response = JSON.parse(response.body)
-      expect(json_response['name']).to eq("New Product")
+      expect(json_response['data']['attributes']['name']).to eq("New Product")
     end
 
     it "returns validation errors (422) with invalid attributes" do

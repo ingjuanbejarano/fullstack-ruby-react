@@ -24,7 +24,11 @@ export function useProducts(): UseProductsReturn {
     setError(null);
     try {
       const response = await api.get('/products', params);
-      setProducts(response.products);
+      const formattedProducts = response.data.map((item: any) => ({
+        id: Number(item.id),
+        ...item.attributes
+      }));
+      setProducts(formattedProducts);
       setMeta(response.meta);
     } catch (err: any) {
       setError(err?.data?.error || 'Failed to fetch products');
