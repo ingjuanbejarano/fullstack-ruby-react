@@ -1,2 +1,2 @@
-SPECIFICATIONS.md
-walkthrough.md
+# Git ignore file for the root project
+.env
